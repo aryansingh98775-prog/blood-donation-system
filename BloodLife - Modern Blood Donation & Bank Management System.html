@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:5000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodLife - Modern Blood Donation &amp; Bank Management System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="./BloodLife - Modern Blood Donation &amp; Bank Management System_files/saved_resource"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blood: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                            950: '#450a0a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="./BloodLife - Modern Blood Donation &amp; Bank Management System_files/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./BloodLife - Modern Blood Donation &amp; Bank Management System_files/css2" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./BloodLife - Modern Blood Donation &amp; Bank Management System_files/style.css">
+    
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, system-ui, -apple-system, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}.pointer-events-none{pointer-events:none}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-y-0{top:0px;bottom:0px}.left-0{left:0px}.left-1\/2{left:50%}.right-0{right:0px}.right-4{right:1rem}.top-0{top:0px}.top-4{top:1rem}.-z-10{z-index:-10}.z-10{z-index:10}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.-mt-1{margin-top:-0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.mr-1{margin-right:0.25rem}.mr-1\.5{margin-right:0.375rem}.mr-2{margin-right:0.5rem}.mr-2\.5{margin-right:0.625rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-12{margin-top:3rem}.mt-16{margin-top:4rem}.mt-2{margin-top:0.5rem}.mt-2\.5{margin-top:0.625rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1\.5{height:0.375rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-2{height:0.5rem}.h-8{height:2rem}.h-96{height:24rem}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-2{width:0.5rem}.w-8{width:2rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-7xl{max-width:80rem}.max-w-xl{max-width:36rem}.flex-grow{flex-grow:1}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:0.375rem}.gap-12{gap:3rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.375rem * var(--tw-space-x-reverse));margin-left:calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.625rem * var(--tw-space-x-reverse));margin-left:calc(0.625rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-amber-200\/60{border-color:rgb(253 230 138 / 0.6)}.border-amber-300{--tw-border-opacity:1;border-color:rgb(252 211 77 / var(--tw-border-opacity, 1))}.border-blood-100{--tw-border-opacity:1;border-color:rgb(254 226 226 / var(--tw-border-opacity, 1))}.border-blood-200{--tw-border-opacity:1;border-color:rgb(254 202 202 / var(--tw-border-opacity, 1))}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-rose-300{--tw-border-opacity:1;border-color:rgb(253 164 175 / var(--tw-border-opacity, 1))}.border-rose-400\/40{border-color:rgb(251 113 133 / 0.4)}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-200\/80{border-color:rgb(226 232 240 / 0.8)}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-slate-700\/60{border-color:rgb(51 65 85 / 0.6)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-50\/30{background-color:rgb(255 251 235 / 0.3)}.bg-amber-50\/80{background-color:rgb(255 251 235 / 0.8)}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-blood-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-blood-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-blood-50\/70{background-color:rgb(254 242 242 / 0.7)}.bg-blood-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.bg-blood-900\/60{background-color:rgb(127 29 29 / 0.6)}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-red-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230 / var(--tw-bg-opacity, 1))}.bg-rose-50{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.bg-rose-50\/40{background-color:rgb(255 241 242 / 0.4)}.bg-rose-500{--tw-bg-opacity:1;background-color:rgb(244 63 94 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-800\/80{background-color:rgb(30 41 59 / 0.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/20{background-color:rgb(255 255 255 / 0.2)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-amber-500{--tw-gradient-from:#f59e0b var(--tw-gradient-from-position);--tw-gradient-to:rgb(245 158 11 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blood-400\/10{--tw-gradient-from:rgb(248 113 113 / 0.1) var(--tw-gradient-from-position);--tw-gradient-to:rgb(248 113 113 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blood-50\/60{--tw-gradient-from:rgb(254 242 242 / 0.6) var(--tw-gradient-from-position);--tw-gradient-to:rgb(254 242 242 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blood-600{--tw-gradient-from:#dc2626 var(--tw-gradient-from-position);--tw-gradient-to:rgb(220 38 38 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blood-700{--tw-gradient-from:#b91c1c var(--tw-gradient-from-position);--tw-gradient-to:rgb(185 28 28 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-red-600{--tw-gradient-from:#dc2626 var(--tw-gradient-from-position);--tw-gradient-to:rgb(220 38 38 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-blood-600{--tw-gradient-to:rgb(220 38 38 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #dc2626 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-rose-500\/15{--tw-gradient-to:rgb(244 63 94 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(244 63 94 / 0.15) var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-rose-700{--tw-gradient-to:rgb(190 18 60 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #be123c var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-white{--tw-gradient-to:rgb(255 255 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #fff var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-blood-400\/10{--tw-gradient-to:rgb(248 113 113 / 0.1) var(--tw-gradient-to-position)}.to-blood-800{--tw-gradient-to:#991b1b var(--tw-gradient-to-position)}.to-orange-500{--tw-gradient-to:#f97316 var(--tw-gradient-to-position)}.to-rose-500{--tw-gradient-to:#f43f5e var(--tw-gradient-to-position)}.to-rose-600{--tw-gradient-to:#e11d48 var(--tw-gradient-to-position)}.to-rose-700{--tw-gradient-to:#be123c var(--tw-gradient-to-position)}.to-slate-50{--tw-gradient-to:#f8fafc var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pl-3{padding-left:0.75rem}.pl-9{padding-left:2.25rem}.pr-4{padding-right:1rem}.pt-12{padding-top:3rem}.pt-2{padding-top:0.5rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.pt-8{padding-top:2rem}.text-left{text-align:left}.text-center{text-align:center}.font-sans{font-family:Inter, system-ui, -apple-system, sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-blood-100{--tw-text-opacity:1;color:rgb(254 226 226 / var(--tw-text-opacity, 1))}.text-blood-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-blood-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-blood-800{--tw-text-opacity:1;color:rgb(153 27 27 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-rose-100{--tw-text-opacity:1;color:rgb(255 228 230 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-rose-500{--tw-text-opacity:1;color:rgb(244 63 94 / var(--tw-text-opacity, 1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72 / var(--tw-text-opacity, 1))}.text-rose-700{--tw-text-opacity:1;color:rgb(190 18 60 / var(--tw-text-opacity, 1))}.text-rose-800{--tw-text-opacity:1;color:rgb(159 18 57 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-70{opacity:0.7}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-blood-500\/20{--tw-shadow-color:rgb(239 68 68 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.shadow-blood-500\/25{--tw-shadow-color:rgb(239 68 68 / 0.25);--tw-shadow:var(--tw-shadow-colored)}.shadow-blood-500\/30{--tw-shadow-color:rgb(239 68 68 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.hover\:-translate-y-1:hover{--tw-translate-y:-0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-\[1\.02\]:hover{--tw-scale-x:1.02;--tw-scale-y:1.02;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-amber-300:hover{--tw-border-opacity:1;border-color:rgb(252 211 77 / var(--tw-border-opacity, 1))}.hover\:border-emerald-300:hover{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.hover\:border-rose-400:hover{--tw-border-opacity:1;border-color:rgb(251 113 133 / var(--tw-border-opacity, 1))}.hover\:border-slate-400:hover{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity, 1))}.hover\:bg-blood-50:hover{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.hover\:bg-blood-700:hover{--tw-bg-opacity:1;background-color:rgb(185 28 28 / var(--tw-bg-opacity, 1))}.hover\:bg-blood-900:hover{--tw-bg-opacity:1;background-color:rgb(127 29 29 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-50:hover{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-100:hover{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.hover\:from-blood-700:hover{--tw-gradient-from:#b91c1c var(--tw-gradient-from-position);--tw-gradient-to:rgb(185 28 28 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-rose-700:hover{--tw-gradient-to:#be123c var(--tw-gradient-to-position)}.hover\:text-blood-600:hover{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.hover\:text-blood-800:hover{--tw-text-opacity:1;color:rgb(153 27 27 / var(--tw-text-opacity, 1))}.hover\:text-rose-200:hover{--tw-text-opacity:1;color:rgb(254 205 211 / var(--tw-text-opacity, 1))}.hover\:text-rose-400:hover{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.hover\:text-slate-400:hover{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.hover\:shadow-lg:hover{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-md:hover{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:bg-white:focus{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-blood-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(239 68 68 / var(--tw-ring-opacity, 1))}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-blood-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.peer:checked ~ .peer-checked\:border-blood-600{--tw-border-opacity:1;border-color:rgb(220 38 38 / var(--tw-border-opacity, 1))}.peer:checked ~ .peer-checked\:bg-blood-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.peer:checked ~ .peer-checked\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.peer:checked ~ .peer-checked\:shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}@media (min-width: 640px){.sm\:mt-0{margin-top:0px}.sm\:inline{display:inline}.sm\:w-auto{width:auto}.sm\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:p-8{padding:2rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-5xl{font-size:3rem;line-height:1}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 768px){.md\:mt-0{margin-top:0px}.md\:inline{display:inline}.md\:flex{display:flex}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}}@media (min-width: 1024px){.lg\:col-span-5{grid-column:span 5 / span 5}.lg\:col-span-7{grid-column:span 7 / span 7}.lg\:mx-0{margin-left:0px;margin-right:0px}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:grid-cols-8{grid-template-columns:repeat(8, minmax(0, 1fr))}.lg\:justify-start{justify-content:flex-start}.lg\:space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:py-24{padding-top:6rem;padding-bottom:6rem}.lg\:text-left{text-align:left}.lg\:text-6xl{font-size:3.75rem;line-height:1}}</style></head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Top Emergency Announcement Bar -->
+    <div class="bg-gradient-to-r from-blood-700 via-blood-600 to-rose-700 text-white text-xs sm:text-sm py-2 px-4 text-center font-medium shadow-inner flex items-center justify-center gap-3">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-white/20 text-white animate-pulse">
+            <i class="fa-solid fa-heart-pulse mr-1"></i> Live Emergency Network
+        </span>
+        <span>Every 2 seconds, someone in the nation needs blood. Your single donation can save up to 3 lives.</span>
+        <a href="http://127.0.0.1:5000/requests/create" class="underline font-bold hover:text-rose-200 hidden md:inline ml-2">Request Blood Now →</a>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-18 py-2">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="http://127.0.0.1:5000/" class="flex items-center space-x-2.5 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blood-700 to-rose-500 flex items-center justify-center text-white shadow-md shadow-blood-500/20 group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-droplet text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-black tracking-tight text-slate-900 group-hover:text-blood-600 transition-colors" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                                Blood<span class="text-blood-600">Life</span>
+                            </span>
+                            <span class="block text-[10px] font-semibold uppercase tracking-wider text-slate-600 -mt-1">Donation Network</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-3 font-medium text-sm text-slate-600">
+                    <a href="http://127.0.0.1:5000/" class="px-3 py-2 rounded-lg hover:text-blood-600 hover:bg-blood-50 transition-colors text-blood-600 font-semibold bg-blood-50/70">
+                        <i class="fa-solid fa-house mr-1.5 opacity-70"></i> Home
+                    </a>
+                    <a href="http://127.0.0.1:5000/donors" class="px-3 py-2 rounded-lg hover:text-blood-600 hover:bg-blood-50 transition-colors ">
+                        <i class="fa-solid fa-users mr-1.5 opacity-70"></i> Find Donors
+                    </a>
+                    <a href="http://127.0.0.1:5000/requests" class="px-3 py-2 rounded-lg hover:text-blood-600 hover:bg-blood-50 transition-colors ">
+                        <i class="fa-solid fa-hand-holding-medical mr-1.5 opacity-70"></i> Urgent Requests
+                    </a>
+                    <a href="http://127.0.0.1:5000/compatibility" class="px-3 py-2 rounded-lg hover:text-blood-600 hover:bg-blood-50 transition-colors ">
+                        <i class="fa-solid fa-diagram-project mr-1.5 opacity-70"></i> Compatibility
+                    </a>
+                </div>
+
+                <!-- Auth Buttons / User Profile -->
+                <div class="hidden md:flex items-center space-x-3">
+                    
+                        <a href="http://127.0.0.1:5000/login" class="text-sm font-semibold text-slate-700 hover:text-blood-600 px-3 py-2 transition">
+                            Sign In
+                        </a>
+                        <a href="http://127.0.0.1:5000/register" class="inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-blood-600 to-rose-600 text-white text-sm font-semibold hover:from-blood-700 hover:to-rose-700 transition shadow-sm shadow-blood-500/25">
+                            <i class="fa-solid fa-user-plus mr-1.5"></i> Register Now
+                        </a>
+                    
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
+            <a href="http://127.0.0.1:5000/" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blood-600 hover:bg-blood-50">Home</a>
+            <a href="http://127.0.0.1:5000/donors" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blood-600 hover:bg-blood-50">Find Donors</a>
+            <a href="http://127.0.0.1:5000/requests" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blood-600 hover:bg-blood-50">Urgent Requests</a>
+            <a href="http://127.0.0.1:5000/compatibility" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blood-600 hover:bg-blood-50">Blood Compatibility</a>
+            <a href="http://127.0.0.1:5000/requests/create" class="block px-3 py-2 rounded-md text-base font-medium text-blood-700 bg-blood-50">Request Blood</a>
+            <div class="border-t border-slate-200 my-2 pt-2">
+                
+                    <a href="http://127.0.0.1:5000/login" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700">Sign In</a>
+                    <a href="http://127.0.0.1:5000/register" class="block px-3 py-2 rounded-md text-base font-medium text-blood-600">Register</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 w-full">
+        
+            
+        
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-b from-blood-50/60 via-white to-slate-50 py-16 lg:py-24 border-b border-slate-200/80">
+    <!-- Ambient Red Glow Effect -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-r from-blood-400/10 via-rose-500/15 to-blood-400/10 blur-3xl -z-10 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Hero Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-blood-100 border border-blood-200 text-blood-800 text-xs font-bold tracking-wide uppercase">
+                    <span class="w-2 h-2 rounded-full bg-blood-600 animate-ping"></span>
+                    <span>Real-Time Blood Bank &amp; Donor Network</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                    Donate Blood, <br class="hidden sm:inline">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blood-600 to-rose-600">Save a Life</span> Today.
+                </h1>
+
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Connecting voluntary blood donors with hospitals and critical care patients in real-time. Join thousands of verified lifesavers or find immediate blood units with zero delays.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="http://127.0.0.1:5000/donors" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-blood-600 to-rose-600 text-white font-bold text-base hover:from-blood-700 hover:to-rose-700 transition shadow-lg shadow-blood-500/30 hover:scale-[1.02]">
+                        <i class="fa-solid fa-magnifying-glass mr-2.5"></i> Find Blood Donors
+                    </a>
+                    
+                    <a href="http://127.0.0.1:5000/register" class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white border border-slate-300 text-slate-800 font-bold text-base hover:bg-slate-50 hover:border-slate-400 transition shadow-sm hover:scale-[1.02]">
+                        <i class="fa-solid fa-hand-holding-heart text-blood-600 mr-2.5"></i> Become a Donor
+                    </a>
+                    
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-500 font-medium">
+                    <div class="flex items-center space-x-1.5">
+                        <i class="fa-solid fa-shield-halved text-emerald-500 text-sm"></i>
+                        <span>100% Verified Donors</span>
+                    </div>
+                    <div class="flex items-center space-x-1.5">
+                        <i class="fa-solid fa-hospital text-blue-500 text-sm"></i>
+                        <span>Hospital Verified Requests</span>
+                    </div>
+                    <div class="flex items-center space-x-1.5">
+                        <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+                        <span>Instant Match Dispatch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hero Card / Quick Match Card -->
+            <div class="lg:col-span-5">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200/80 relative">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Immediate Blood Search</h3>
+                            <p class="text-xs text-slate-500">Find compatible donors in seconds</p>
+                        </div>
+                        <span class="w-10 h-10 rounded-full bg-rose-50 text-blood-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-stethoscope"></i>
+                        </span>
+                    </div>
+
+                    <form action="http://127.0.0.1:5000/donors" method="GET" class="mt-5 space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Required Blood Group</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="A+" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        A+
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="A-" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        A-
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="B+" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        B+
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="B-" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        B-
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="AB+" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        AB+
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="AB-" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        AB-
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="O+" class="peer sr-only" checked="">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        O+
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="blood_group" value="O-" class="peer sr-only">
+                                    <div class="text-center py-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 peer-checked:shadow-sm transition">
+                                        O-
+                                    </div>
+                                </label>
+                                
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">City / Location</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </span>
+                                <input type="text" name="city" placeholder="e.g. New York, Chicago..." class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition" fdprocessedid="pr1tpt">
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold text-sm transition shadow flex items-center justify-center space-x-2" fdprocessedid="73urwn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <span>Search Active Donors</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Emergency Assistance Prompt -->
+                    <div class="mt-4 p-3 bg-amber-50/80 rounded-xl border border-amber-200/60 flex items-start space-x-2.5">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 text-sm"></i>
+                        <div class="text-xs text-amber-800 leading-snug">
+                            <span class="font-bold">Life-Threatening Emergency?</span> Call our immediate 24/7 hotline at <strong class="underline">1-800-BLOOD-HELP</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Impact Metrics Counter -->
+<section class="bg-white py-10 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-blood-100 text-blood-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="text-3xl font-black text-slate-900 tracking-tight">8</div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Registered Donors</div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-box-archive"></i>
+                </div>
+                <div class="text-3xl font-black text-slate-900 tracking-tight">146</div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Units in Reserve</div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-hand-holding-medical"></i>
+                </div>
+                <div class="text-3xl font-black text-slate-900 tracking-tight">4</div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Active Requests</div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="text-3xl font-black text-slate-900 tracking-tight">6+</div>
+                <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">Lives Saved</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Live Blood Inventory Status Board -->
+<section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-blood-600">Blood Bank Reserve</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                    Real-Time Blood Stock Monitor
+                </h2>
+                <p class="text-sm text-slate-600 mt-1">Live tracking of whole blood units available across certified regional storage hubs.</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center space-x-3 text-xs">
+                <span class="inline-flex items-center px-2 py-1 rounded-md bg-emerald-100 text-emerald-800 font-bold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5"></span> Optimal (&gt;15)
+                </span>
+                <span class="inline-flex items-center px-2 py-1 rounded-md bg-amber-100 text-amber-800 font-bold">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 mr-1.5"></span> Moderate (6-15)
+                </span>
+                <span class="inline-flex items-center px-2 py-1 rounded-md bg-rose-100 text-rose-800 font-bold">
+                    <span class="w-2 h-2 rounded-full bg-rose-500 mr-1.5 animate-ping"></span> Critical (≤5)
+                </span>
+            </div>
+        </div>
+
+        <!-- Inventory Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+            
+                
+                
+                
+                
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-emerald-200 bg-white hover:border-emerald-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        A+
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">24</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-50 text-emerald-700 border-emerald-200">
+                            Optimal
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-amber-200 bg-amber-50/30 hover:border-amber-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        A-
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">8</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-amber-100 text-amber-800 border-amber-300">
+                            Low
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-amber-200 bg-amber-50/30 hover:border-amber-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        AB+
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">14</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-amber-100 text-amber-800 border-amber-300">
+                            Low
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-rose-300 bg-rose-50/40 hover:border-rose-400">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        AB-
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">4</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-rose-100 text-rose-700 border-rose-300">
+                            Critical
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-emerald-200 bg-white hover:border-emerald-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        B+
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">32</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-50 text-emerald-700 border-emerald-200">
+                            Optimal
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-amber-200 bg-amber-50/30 hover:border-amber-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        B-
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">6</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-amber-100 text-amber-800 border-amber-300">
+                            Low
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-emerald-200 bg-white hover:border-emerald-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        O+
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">46</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-emerald-50 text-emerald-700 border-emerald-200">
+                            Optimal
+                        </span>
+                    </div>
+                </div>
+            
+                
+                
+                
+                
+                
+                    
+                    
+                    
+                
+
+                <div class="rounded-2xl border p-4 text-center transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-1 border-amber-200 bg-amber-50/30 hover:border-amber-300">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-blood-600 text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blood-500/20 mb-2">
+                        O-
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">12</div>
+                    <div class="text-[11px] font-semibold text-slate-500">Units Ready</div>
+                    <div class="mt-2.5">
+                        <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold border bg-amber-100 text-amber-800 border-amber-300">
+                            Low
+                        </span>
+                    </div>
+                </div>
+            
+        </div>
+
+        <div class="mt-6 text-center">
+            <a href="http://127.0.0.1:5000/compatibility" class="inline-flex items-center text-sm font-bold text-blood-600 hover:text-blood-800 transition">
+                <i class="fa-solid fa-circle-question mr-1.5"></i> Learn which blood group can donate to which →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Active Urgent Requests Section -->
+<section class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-600 flex items-center gap-1.5">
+                    <i class="fa-solid fa-heart-crack"></i> Urgent Blood Requests
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                    Patients Waiting For Donors
+                </h2>
+            </div>
+            <a href="http://127.0.0.1:5000/requests" class="mt-3 sm:mt-0 inline-flex items-center text-sm font-bold text-blood-600 hover:text-blood-800">
+                View All Requests (5) →
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden group">
+                <!-- Urgency Top Stripe -->
+                
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 to-rose-600"></div>
+                
+
+                <div>
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="w-12 h-12 rounded-xl bg-blood-50 border border-blood-100 text-blood-700 font-black text-lg flex items-center justify-center shadow-inner">
+                            O-
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide bg-red-100 text-red-700 animate-pulse">
+                            Immediate
+                        </span>
+                    </div>
+
+                    <h4 class="text-base font-bold text-slate-900 truncate">Test Emergency Patient</h4>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-hospital mr-1.5 text-slate-400"></i> City Emergency Clinic
+                    </p>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-location-dot mr-1.5 text-slate-400"></i> San Francisco
+                    </p>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
+                        <span>Units Needed:</span>
+                        <span class="text-sm font-black text-blood-700">3 Unit(s)</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 pt-2">
+                    <a href="tel:+1 555-999-8888" class="w-full py-2.5 px-3 rounded-xl bg-blood-600 hover:bg-blood-700 text-white font-bold text-xs flex items-center justify-center transition shadow-sm">
+                        <i class="fa-solid fa-phone mr-1.5"></i> Call: +1 555-999-8888
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden group">
+                <!-- Urgency Top Stripe -->
+                
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 to-rose-600"></div>
+                
+
+                <div>
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="w-12 h-12 rounded-xl bg-blood-50 border border-blood-100 text-blood-700 font-black text-lg flex items-center justify-center shadow-inner">
+                            B+
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide bg-red-100 text-red-700 animate-pulse">
+                            Immediate
+                        </span>
+                    </div>
+
+                    <h4 class="text-base font-bold text-slate-900 truncate">Robert Taylor</h4>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-hospital mr-1.5 text-slate-400"></i> Mount Sinai Hospital
+                    </p>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-location-dot mr-1.5 text-slate-400"></i> New York
+                    </p>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
+                        <span>Units Needed:</span>
+                        <span class="text-sm font-black text-blood-700">2 Unit(s)</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 pt-2">
+                    <a href="tel:+1 (555) 111-2233" class="w-full py-2.5 px-3 rounded-xl bg-blood-600 hover:bg-blood-700 text-white font-bold text-xs flex items-center justify-center transition shadow-sm">
+                        <i class="fa-solid fa-phone mr-1.5"></i> Call: +1 (555) 111-2233
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden group">
+                <!-- Urgency Top Stripe -->
+                
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 to-rose-600"></div>
+                
+
+                <div>
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="w-12 h-12 rounded-xl bg-blood-50 border border-blood-100 text-blood-700 font-black text-lg flex items-center justify-center shadow-inner">
+                            O-
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide bg-red-100 text-red-700 animate-pulse">
+                            Immediate
+                        </span>
+                    </div>
+
+                    <h4 class="text-base font-bold text-slate-900 truncate">Emily Hughes</h4>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-hospital mr-1.5 text-slate-400"></i> Northwestern Memorial Hospital
+                    </p>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-location-dot mr-1.5 text-slate-400"></i> Chicago
+                    </p>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
+                        <span>Units Needed:</span>
+                        <span class="text-sm font-black text-blood-700">3 Unit(s)</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 pt-2">
+                    <a href="tel:+1 (555) 222-3344" class="w-full py-2.5 px-3 rounded-xl bg-blood-600 hover:bg-blood-700 text-white font-bold text-xs flex items-center justify-center transition shadow-sm">
+                        <i class="fa-solid fa-phone mr-1.5"></i> Call: +1 (555) 222-3344
+                    </a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col justify-between relative overflow-hidden group">
+                <!-- Urgency Top Stripe -->
+                
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500"></div>
+                
+
+                <div>
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="w-12 h-12 rounded-xl bg-blood-50 border border-blood-100 text-blood-700 font-black text-lg flex items-center justify-center shadow-inner">
+                            A+
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide bg-amber-100 text-amber-800">
+                            Urgent
+                        </span>
+                    </div>
+
+                    <h4 class="text-base font-bold text-slate-900 truncate">Grace Kelly</h4>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-hospital mr-1.5 text-slate-400"></i> Cedars-Sinai Medical Center
+                    </p>
+                    <p class="text-xs text-slate-500 flex items-center mt-1">
+                        <i class="fa-solid fa-location-dot mr-1.5 text-slate-400"></i> Los Angeles
+                    </p>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
+                        <span>Units Needed:</span>
+                        <span class="text-sm font-black text-blood-700">1 Unit(s)</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 pt-2">
+                    <a href="tel:+1 (555) 444-5566" class="w-full py-2.5 px-3 rounded-xl bg-blood-600 hover:bg-blood-700 text-white font-bold text-xs flex items-center justify-center transition shadow-sm">
+                        <i class="fa-solid fa-phone mr-1.5"></i> Call: +1 (555) 444-5566
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-xs font-bold uppercase tracking-wider text-blood-600">Simple 4-Step Process</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+            How Blood Donation Works
+        </h2>
+        <p class="text-slate-600 max-w-xl mx-auto text-sm mt-2">
+            The entire whole blood donation process takes less than an hour, with the actual blood drawing taking only 8 to 10 minutes.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12 text-left">
+            <!-- Step 1 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative">
+                <div class="text-4xl font-black text-blood-100 absolute top-4 right-4">01</div>
+                <div class="w-12 h-12 rounded-xl bg-blood-50 text-blood-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900">Sign Up &amp; Profile</h4>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                    Register as a voluntary donor with your blood group, contact phone, and city to join our instant emergency responder registry.
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative">
+                <div class="text-4xl font-black text-blood-100 absolute top-4 right-4">02</div>
+                <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900">Book Appointment</h4>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                    Select your nearest authorized blood center or mobile blood drive camp at a date and time convenient for you.
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative">
+                <div class="text-4xl font-black text-blood-100 absolute top-4 right-4">03</div>
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-hand-holding-droplet"></i>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900">Quick Donation</h4>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                    Trained phlebotomists perform a quick health check (pulse, hemoglobin, blood pressure) and safely collect 1 unit (approx 450ml).
+                </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm relative">
+                <div class="text-4xl font-black text-blood-100 absolute top-4 right-4">04</div>
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-4">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900">Save 3 Lives</h4>
+                <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                    Your single unit is processed into red blood cells, platelets, and plasma, directly giving second chances to trauma &amp; surgery patients.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section class="py-16 bg-gradient-to-r from-blood-700 via-rose-700 to-blood-800 text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <h2 class="text-3xl sm:text-4xl font-black tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+            Ready to Make a Lifesaving Difference?
+        </h2>
+        <p class="mt-3 text-rose-100 max-w-xl mx-auto text-base">
+            Join thousands of active donors or register your hospital requirement today.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="http://127.0.0.1:5000/register" class="px-8 py-3.5 bg-white text-blood-700 hover:bg-rose-50 font-extrabold rounded-xl text-base shadow-lg transition hover:scale-105">
+                Register as Donor
+            </a>
+            <a href="http://127.0.0.1:5000/requests/create" class="px-8 py-3.5 bg-blood-900/60 hover:bg-blood-900 text-white border border-rose-400/40 font-extrabold rounded-xl text-base transition hover:scale-105">
+                Request Emergency Blood
+            </a>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2.5">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blood-600 to-rose-500 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-droplet text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-white" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                            Blood<span class="text-rose-500">Life</span>
+                        </span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        A real-time medical blood donation management network bridging donors, hospitals, and recipients to eliminate blood shortages.
+                    </p>
+                    <div class="flex space-x-3 text-slate-400">
+                        <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-rose-400 cursor-pointer"><i class="fa-brands fa-twitter"></i></span>
+                        <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-rose-400 cursor-pointer"><i class="fa-brands fa-facebook"></i></span>
+                        <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-rose-400 cursor-pointer"><i class="fa-brands fa-instagram"></i></span>
+                        <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:text-rose-400 cursor-pointer"><i class="fa-brands fa-linkedin"></i></span>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h3 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Quick Navigation</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="http://127.0.0.1:5000/donors" class="hover:text-rose-400 transition">Search Blood Donors</a></li>
+                        <li><a href="http://127.0.0.1:5000/requests" class="hover:text-rose-400 transition">Emergency Blood Needs</a></li>
+                        <li><a href="http://127.0.0.1:5000/requests/create" class="hover:text-rose-400 transition">Post Urgent Request</a></li>
+                        <li><a href="http://127.0.0.1:5000/compatibility" class="hover:text-rose-400 transition">Blood Compatibility Guide</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Donor Guidelines -->
+                <div>
+                    <h3 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Donor Eligibility</h3>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><i class="fa-solid fa-check text-rose-500 mr-2"></i> Age: 18 - 65 years</li>
+                        <li><i class="fa-solid fa-check text-rose-500 mr-2"></i> Weight: 50 kg or greater</li>
+                        <li><i class="fa-solid fa-check text-rose-500 mr-2"></i> 56-day gap between donations</li>
+                        <li><i class="fa-solid fa-check text-rose-500 mr-2"></i> Good general health &amp; vitals</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Emergency Contacts -->
+                <div>
+                    <h3 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Emergency Hotline</h3>
+                    <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60 space-y-2">
+                        <p class="text-xs text-rose-400 font-semibold tracking-wider uppercase">24/7 National Dispatch</p>
+                        <p class="text-xl font-black text-white"><i class="fa-solid fa-phone-volume text-rose-500 mr-2"></i> 1-800-BLOOD-HELP</p>
+                        <p class="text-xs text-slate-400">Available all 365 days for critical medical trauma cases.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>© 2026 BloodLife Management System. Dedicated to saving lives.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <span class="hover:text-slate-400">Privacy Policy</span>
+                    <span class="hover:text-slate-400">Terms of Service</span>
+                    <span class="hover:text-slate-400">Medical Disclaimers</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./BloodLife - Modern Blood Donation &amp; Bank Management System_files/main.js.download"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+    
+
+<span id="PING_CONTENT_PUSH_NOTIFICATION" style="display: none;"></span><span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
