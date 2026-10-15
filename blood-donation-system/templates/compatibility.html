@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Blood Group Compatibility Guide - BloodLife{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    
+    <!-- Title & Introduction -->
+    <div class="text-center max-w-3xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-wider text-blood-600">Medical Reference</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-1" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+            Blood Type Compatibility Guide
+        </h1>
+        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+            Matching the right blood group between a donor and a recipient is critical for safe transfusions. Receiving incompatible blood can trigger life-threatening immune reactions.
+        </p>
+    </div>
+
+    <!-- Interactive Interactive Quick Checker Card -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md">
+        <div class="text-center mb-6">
+            <h3 class="text-lg font-bold text-slate-900">Interactive Compatibility Inspector</h3>
+            <p class="text-xs text-slate-500">Click any blood group below to inspect who they can donate to and receive from</p>
+            
+            <!-- Blood Group Pills -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4">
+                {% for bg in ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'] %}
+                <button type="button" onclick="inspectBloodGroup('{{ bg }}')" id="btn-{{ bg }}" class="px-4 py-2 rounded-xl border-2 border-slate-200 text-sm font-black transition hover:border-blood-600 focus:outline-none {% if bg == 'O-' %}border-blood-600 bg-blood-50 text-blood-700{% else %}text-slate-700{% endif %}">
+                    {{ bg }}
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Dynamic Results Card -->
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Can Donate To -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200">
+                <div class="flex items-center space-x-2 text-emerald-700 font-bold text-sm mb-3">
+                    <span class="w-7 h-7 rounded-lg bg-emerald-100 flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                    </span>
+                    <span>Can Give / Donate Blood To:</span>
+                </div>
+                <div id="can-donate-tags" class="flex flex-wrap gap-2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Can Receive From -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200">
+                <div class="flex items-center space-x-2 text-blue-700 font-bold text-sm mb-3">
+                    <span class="w-7 h-7 rounded-lg bg-blue-100 flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+                    </span>
+                    <span>Can Receive Blood From:</span>
+                </div>
+                <div id="can-receive-tags" class="flex flex-wrap gap-2">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complete Compatibility Grid Table -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm overflow-hidden">
+        <h3 class="text-lg font-bold text-slate-900 mb-2">Master Compatibility Matrix (Red Blood Cells)</h3>
+        <p class="text-xs text-slate-500 mb-6">Cross-reference donor blood types (rows) against patient recipient types (columns).</p>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-center text-xs border-collapse">
+                <thead>
+                    <tr class="bg-slate-100 text-slate-700 uppercase font-bold text-[11px]">
+                        <th class="py-3 px-3 text-left border border-slate-200">Donor Type \ Recipient</th>
+                        {% for bg in ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'] %}
+                        <th class="py-3 px-3 border border-slate-200 font-black text-blood-700">{{ bg }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    {% for donor_bg in ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'] %}
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="py-3 px-3 text-left font-black text-slate-900 border border-slate-200 bg-slate-50">
+                            {{ donor_bg }}
+                            {% if donor_bg == 'O-' %}<span class="text-[9px] font-bold text-rose-600 block">Universal Donor</span>{% endif %}
+                            {% if donor_bg == 'AB+' %}<span class="text-[9px] font-bold text-purple-600 block">Universal Recipient</span>{% endif %}
+                        </td>
+                        {% for rec_bg in ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'] %}
+                            {% if rec_bg in COMPATIBILITY_MATRIX[donor_bg]['can_donate_to'] %}
+                            <td class="py-3 px-3 border border-slate-200 bg-emerald-50/60 text-emerald-600 font-bold">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </td>
+                            {% else %}
+                            <td class="py-3 px-3 border border-slate-200 text-slate-300">
+                                &minus;
+                            </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Educational Pillars -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-rose-100 text-blood-700 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-dna"></i>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">Type O Negative: The Universal Red Cell Donor</h4>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                O Negative blood has neither A nor B antigens, and is Rh negative. It can be safely transfused to patients of <strong>ANY blood type</strong> in sudden emergency rooms and ambulances when there is zero time to cross-match.
+            </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg mb-3">
+                <i class="fa-solid fa-hospital-user"></i>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">Type AB Positive: The Universal Recipient</h4>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                AB Positive patients have both A and B antigens and Rh protein. Their immune system recognizes all foreign blood cells, allowing them to safely receive red blood cells from <strong>ALL 8 blood types</strong>.
+            </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const matrix = {{ COMPATIBILITY_MATRIX|tojson }};
+
+    function inspectBloodGroup(bg) {
+        // Update active button state
+        document.querySelectorAll('[id^="btn-"]').forEach(btn => {
+            btn.className = "px-4 py-2 rounded-xl border-2 border-slate-200 text-sm font-black transition hover:border-blood-600 focus:outline-none text-slate-700";
+        });
+        const activeBtn = document.getElementById('btn-' + bg);
+        if (activeBtn) {
+            activeBtn.className = "px-4 py-2 rounded-xl border-2 border-blood-600 bg-blood-50 text-blood-700 text-sm font-black transition focus:outline-none";
+        }
+
+        const data = matrix[bg] || { can_donate_to: [], can_receive_from: [] };
+
+        // Render Donate Tags
+        const donateDiv = document.getElementById('can-donate-tags');
+        donateDiv.innerHTML = data.can_donate_to.map(item => `
+            <span class="px-3 py-1.5 rounded-lg bg-emerald-100 border border-emerald-300 text-emerald-900 font-black text-sm">
+                ${item}
+            </span>
+        `).join('');
+
+        // Render Receive Tags
+        const receiveDiv = document.getElementById('can-receive-tags');
+        receiveDiv.innerHTML = data.can_receive_from.map(item => `
+            <span class="px-3 py-1.5 rounded-lg bg-blue-100 border border-blue-300 text-blue-900 font-black text-sm">
+                ${item}
+            </span>
+        `).join('');
+    }
+
+    // Default initialize with O-
+    document.addEventListener('DOMContentLoaded', () => {
+        inspectBloodGroup('O-');
+    });
+</script>
+{% endblock %}

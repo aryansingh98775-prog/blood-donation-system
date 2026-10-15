@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Recipient Portal - BloodLife{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    
+    <!-- Welcome Header -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-blood-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+            <div class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-white/10 text-rose-200 uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-hospital-user mr-1 text-rose-400"></i> Patient & Hospital Portal
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                {{ user['full_name'] }}
+            </h1>
+            <p class="text-xs text-slate-400 mt-1">
+                <i class="fa-solid fa-location-dot mr-1"></i> {{ user['city'] }} &bull; <i class="fa-solid fa-phone mr-1"></i> {{ user['phone'] }} &bull; Patient Blood Group: <span class="text-white font-bold">{{ user['blood_group'] or 'Not Specified' }}</span>
+            </p>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <a href="{{ url_for('create_request') }}" class="px-5 py-3 rounded-xl bg-gradient-to-r from-blood-600 to-rose-600 hover:from-blood-700 hover:to-rose-700 text-white font-bold text-xs shadow-lg transition">
+                <i class="fa-solid fa-plus-circle mr-1.5"></i> Create New Request
+            </a>
+            <a href="{{ url_for('list_donors') }}" class="px-4 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition">
+                <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Search Donors
+            </a>
+        </div>
+    </div>
+
+    <!-- Active Requests Table -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900">My Emergency Blood Requests</h3>
+                <p class="text-xs text-slate-500">Track and manage requests you have published</p>
+            </div>
+        </div>
+
+        {% if my_requests %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-slate-100 text-slate-400 uppercase font-bold text-[10px]">
+                        <th class="py-3 px-4">Patient Name</th>
+                        <th class="py-3 px-4">Blood Group</th>
+                        <th class="py-3 px-4">Units</th>
+                        <th class="py-3 px-4">Hospital / City</th>
+                        <th class="py-3 px-4">Urgency</th>
+                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4">Date Posted</th>
+                        <th class="py-3 px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for req in my_requests %}
+                    <tr>
+                        <td class="py-3.5 px-4 font-bold text-slate-900">{{ req['patient_name'] }}</td>
+                        <td class="py-3.5 px-4">
+                            <span class="w-8 h-8 rounded-lg bg-blood-50 text-blood-700 font-black inline-flex items-center justify-center text-xs">
+                                {{ req['blood_group'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 font-bold text-slate-800">{{ req['units_needed'] }} Unit(s)</td>
+                        <td class="py-3.5 px-4 text-slate-600">{{ req['hospital_name'] }}, {{ req['city'] }}</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase {% if req['urgency'] == 'Immediate' %}bg-red-100 text-red-700{% elif req['urgency'] == 'Urgent' %}bg-amber-100 text-amber-800{% else %}bg-slate-100 text-slate-700{% endif %}">
+                                {{ req['urgency'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {% if req['status'] == 'Approved' %}bg-emerald-100 text-emerald-800{% elif req['status'] == 'Fulfilled' %}bg-blue-100 text-blue-800{% else %}bg-amber-100 text-amber-800{% endif %}">
+                                {{ req['status'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-500">{{ req['created_at'][:10] }}</td>
+                        <td class="py-3.5 px-4">
+                            {% if req['status'] != 'Fulfilled' and req['status'] != 'Cancelled' %}
+                            <form action="{{ url_for('update_request_status', req_id=req['id']) }}" method="POST" class="inline">
+                                <input type="hidden" name="status" value="Fulfilled">
+                                <button type="submit" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold rounded-lg border border-emerald-200 transition">
+                                    <i class="fa-solid fa-check mr-1"></i> Mark Fulfilled
+                                </button>
+                            </form>
+                            {% else %}
+                            <span class="text-slate-400 italic">No action</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-2xl">
+            You haven't posted any blood requests yet.
+            <a href="{{ url_for('create_request') }}" class="text-blood-600 font-bold underline ml-1">Create an emergency request now</a>.
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Compatible Donors Directory Ready to Contact -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900">Recommended Donors You Can Receive Blood From</h3>
+                <p class="text-xs text-slate-500">Based on standard compatibility matrix for your blood group ({{ user['blood_group'] }})</p>
+            </div>
+            <a href="{{ url_for('list_donors') }}" class="text-xs font-bold text-blood-600 hover:text-blood-800">
+                Search Full Directory &rarr;
+            </a>
+        </div>
+
+        {% if matching_donors %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for donor in matching_donors %}
+            <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-blood-600 text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                        {{ donor['blood_group'] }}
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-slate-900">{{ donor['full_name'] }}</div>
+                        <div class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> {{ donor['city'] }}</div>
+                    </div>
+                </div>
+                <a href="tel:{{ donor['phone'] }}" class="py-1.5 px-3 rounded-lg bg-white border border-slate-300 hover:bg-slate-100 text-slate-800 text-xs font-bold shadow-sm transition">
+                    <i class="fa-solid fa-phone text-blood-600 mr-1"></i> Call
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="p-6 text-center text-xs text-slate-500 bg-slate-50 rounded-2xl">
+            Please make sure your profile has your blood group selected to find matching donors.
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

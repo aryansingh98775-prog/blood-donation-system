@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}Donor Dashboard - BloodLife{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    
+    <!-- Welcome Header Banner -->
+    <div class="bg-gradient-to-r from-blood-700 via-rose-700 to-blood-800 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+        <!-- Ambient Watermark -->
+        <div class="absolute -right-6 -bottom-10 text-white/5 text-9xl pointer-events-none font-black">
+            {{ user['blood_group'] }}
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="w-16 h-16 rounded-2xl bg-white text-blood-700 font-black text-2xl flex items-center justify-center shadow-lg">
+                {{ user['blood_group'] }}
+            </div>
+            <div>
+                <div class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-white/20 text-rose-100 uppercase tracking-wider mb-1">
+                    <i class="fa-solid fa-medal mr-1 text-amber-300"></i> Certified Voluntary Donor
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-black tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                    Hello, {{ user['full_name'] }}
+                </h1>
+                <p class="text-xs text-rose-100 mt-0.5">
+                    <i class="fa-solid fa-location-dot mr-1"></i> {{ user['city'] }} &bull; <i class="fa-solid fa-phone mr-1"></i> {{ user['phone'] }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Availability Toggle Form -->
+        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/15 flex items-center justify-between gap-4">
+            <div>
+                <div class="text-xs font-bold uppercase tracking-wider text-rose-100">Live Status</div>
+                <div class="text-sm font-black {% if user['is_available'] == 1 %}text-emerald-300{% else %}text-slate-300{% endif %}">
+                    {% if user['is_available'] == 1 %}
+                        <i class="fa-solid fa-circle-check mr-1"></i> Available for Emergencies
+                    {% else %}
+                        <i class="fa-solid fa-circle-xmark mr-1"></i> Currently Unavailable
+                    {% endif %}
+                </div>
+            </div>
+
+            <form action="{{ url_for('toggle_donor_availability') }}" method="POST">
+                <button type="submit" class="px-3.5 py-2 rounded-xl text-xs font-bold transition shadow-sm {% if user['is_available'] == 1 %}bg-white/20 hover:bg-white/30 text-white border border-white/30{% else %}bg-emerald-500 hover:bg-emerald-600 text-white{% endif %}">
+                    {% if user['is_available'] == 1 %}
+                        Set Inactive
+                    {% else %}
+                        Set Active
+                    {% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Eligibility Status & Digital Donor Card Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left: Medical Eligibility Card -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div class="flex items-center space-x-2.5">
+                        <span class="w-8 h-8 rounded-lg bg-rose-50 text-blood-600 flex items-center justify-center">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900">Donation Eligibility Status</h3>
+                            <p class="text-xs text-slate-500">Based on standard health guidelines & cooldown interval</p>
+                        </div>
+                    </div>
+
+                    {% if eligibility.eligible %}
+                    <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check"></i> Eligible Now
+                    </span>
+                    {% else %}
+                    <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-amber-100 text-amber-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-clock"></i> In Cooldown
+                    </span>
+                    {% endif %}
+                </div>
+
+                <!-- Explanation / Progress -->
+                <div class="mt-5 space-y-3">
+                    {% for reason in eligibility.reasons %}
+                    <div class="flex items-start space-x-2 text-xs text-slate-700">
+                        {% if eligibility.eligible %}
+                        <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5"></i>
+                        {% else %}
+                        <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+                        {% endif %}
+                        <span class="leading-relaxed">{{ reason }}</span>
+                    </div>
+                    {% endfor %}
+
+                    <div class="grid grid-cols-3 gap-3 pt-3 text-center">
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block">Registered Age</span>
+                            <span class="text-sm font-black text-slate-800">{{ user['age'] or 'N/A' }} yrs</span>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block">Weight</span>
+                            <span class="text-sm font-black text-slate-800">{{ user['weight'] or 'N/A' }} kg</span>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                            <span class="text-[10px] uppercase font-bold text-slate-400 block">Last Donation</span>
+                            <span class="text-sm font-black text-slate-800">{{ user['last_donation_date'] or 'First Time' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action footer -->
+            <div class="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+                <a href="{{ url_for('book_appointment') }}" class="flex-1 py-2.5 px-4 bg-blood-600 hover:bg-blood-700 text-white font-bold text-xs rounded-xl transition text-center shadow-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                    <span>Schedule Donation Appointment</span>
+                </a>
+                <a href="{{ url_for('compatibility') }}" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition text-center">
+                    Compatibility Matrix
+                </a>
+            </div>
+        </div>
+
+        <!-- Right: Digital Donor Card -->
+        <div class="lg:col-span-5 bg-gradient-to-tr from-slate-900 via-slate-800 to-blood-950 rounded-3xl p-6 text-white shadow-xl border border-slate-700/60 relative overflow-hidden flex flex-col justify-between">
+            <div class="absolute -right-12 -top-12 w-40 h-40 bg-blood-600/20 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-700/60">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-droplet text-rose-500 text-lg"></i>
+                        <span class="font-bold tracking-tight text-sm uppercase">BloodLife Donor Pass</span>
+                    </div>
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                        ID: BL-{{ "%05d" % user['id'] }}
+                    </span>
+                </div>
+
+                <div class="my-6 flex items-center justify-between">
+                    <div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Donor Name</div>
+                        <div class="text-xl font-black text-white mt-0.5 tracking-tight">{{ user['full_name'] }}</div>
+                        <div class="text-xs text-slate-300 mt-1 flex items-center">
+                            <i class="fa-solid fa-city text-slate-500 mr-1.5"></i> {{ user['city'] }}
+                        </div>
+                    </div>
+
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blood-600 to-rose-600 text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-blood-500/30">
+                        {{ user['blood_group'] }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-700/60 flex items-center justify-between text-[11px] text-slate-400">
+                <div>
+                    <span>Status: </span>
+                    <span class="font-bold text-emerald-400">Active Lifesaver</span>
+                </div>
+                <div class="flex items-center space-x-1 font-mono text-[10px] text-slate-500">
+                    <i class="fa-solid fa-qrcode text-base text-slate-300"></i>
+                    <span>VERIFIED</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Urgent Matching Requests Alert -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+                    Urgent Requests Compatible With Your Blood Group ({{ user['blood_group'] }})
+                </h3>
+                <p class="text-xs text-slate-500 mt-0.5">Patients that can safely receive your blood units</p>
+            </div>
+            <a href="{{ url_for('list_requests') }}" class="text-xs font-bold text-blood-600 hover:text-blood-800">
+                View All &rarr;
+            </a>
+        </div>
+
+        {% if matching_requests %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {% for req in matching_requests %}
+            <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:shadow-md transition flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="px-2 py-0.5 rounded text-[11px] font-black bg-blood-100 text-blood-800">
+                            Recipient: {{ req['blood_group'] }}
+                        </span>
+                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-rose-100 text-rose-800">
+                            {{ req['urgency'] }}
+                        </span>
+                    </div>
+                    <div class="text-sm font-bold text-slate-900">{{ req['patient_name'] }}</div>
+                    <div class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-hospital mr-1"></i> {{ req['hospital_name'] }}, {{ req['city'] }}</div>
+                    <div class="text-xs font-semibold text-blood-700 mt-1">Needs {{ req['units_needed'] }} Unit(s)</div>
+                </div>
+                <div class="mt-4 pt-2 border-t border-slate-100">
+                    <a href="tel:{{ req['contact_phone'] }}" class="w-full py-2 bg-blood-600 hover:bg-blood-700 text-white rounded-xl text-xs font-bold flex items-center justify-center transition">
+                        <i class="fa-solid fa-phone mr-1.5"></i> Call: {{ req['contact_phone'] }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="p-6 text-center text-xs text-slate-500 bg-slate-50 rounded-2xl">
+            No active emergency requests pending for your compatible blood groups right now. Thank you for staying on standby!
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Donation Appointments History -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900">My Donation Appointments</h3>
+                <p class="text-xs text-slate-500">Track scheduled visits to blood donation centers and camps</p>
+            </div>
+            <a href="{{ url_for('book_appointment') }}" class="px-3.5 py-1.5 bg-blood-50 hover:bg-blood-100 text-blood-700 font-bold text-xs rounded-xl border border-blood-200 transition">
+                <i class="fa-solid fa-plus mr-1"></i> New Booking
+            </a>
+        </div>
+
+        {% if appointments %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-slate-100 text-slate-400 uppercase font-bold text-[10px]">
+                        <th class="py-3 px-4">Center / Facility</th>
+                        <th class="py-3 px-4">Date & Time</th>
+                        <th class="py-3 px-4">Units</th>
+                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4">Notes</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for apt in appointments %}
+                    <tr>
+                        <td class="py-3.5 px-4 font-bold text-slate-800">{{ apt['blood_bank_center'] }}</td>
+                        <td class="py-3.5 px-4 text-slate-600">{{ apt['appointment_date'] }} at {{ apt['appointment_time'] }}</td>
+                        <td class="py-3.5 px-4 font-semibold text-slate-800">{{ apt['units'] }} Unit</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {% if apt['status'] == 'Completed' %}bg-emerald-100 text-emerald-800{% elif apt['status'] == 'Cancelled' %}bg-slate-100 text-slate-600{% else %}bg-blue-100 text-blue-800{% endif %}">
+                                {{ apt['status'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-500 italic">{{ apt['notes'] or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-2xl">
+            You haven't scheduled any donation appointments yet. 
+            <a href="{{ url_for('book_appointment') }}" class="text-blood-600 font-bold underline ml-1">Schedule your first appointment today</a>.
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

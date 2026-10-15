@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Control Center - BloodLife{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    
+    <!-- Admin Header -->
+    <div class="bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+            <div class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-purple-500/20 text-purple-200 uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-user-shield mr-1.5 text-purple-400"></i> Central Blood Bank Management
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                Administrator Control Center
+            </h1>
+            <p class="text-xs text-slate-400 mt-1">Supervise inventory reserves, approve emergency requests, and verify donor drives.</p>
+        </div>
+
+        <div class="flex items-center space-x-3 text-xs">
+            <span class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 font-bold">
+                <i class="fa-solid fa-server mr-1 text-emerald-400"></i> Server: Healthy
+            </span>
+            <span class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 font-bold">
+                <i class="fa-solid fa-database mr-1 text-blue-400"></i> SQLite Live
+            </span>
+        </div>
+    </div>
+
+    <!-- Overview Counters -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Donors</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">{{ total_donors }}</div>
+            <div class="text-[11px] text-emerald-600 font-semibold mt-1"><i class="fa-solid fa-circle-check mr-1"></i> Active registry</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Recipients</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">{{ total_recipients }}</div>
+            <div class="text-[11px] text-slate-500 font-semibold mt-1">Hospitals & Patients</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Pending Requests</div>
+            <div class="text-2xl font-black text-amber-600 mt-1">{{ pending_requests }}</div>
+            <div class="text-[11px] text-amber-600 font-semibold mt-1">Requires review</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Blood Units</div>
+            <div class="text-2xl font-black text-blood-600 mt-1">{{ total_units }}</div>
+            <div class="text-[11px] text-blood-600 font-semibold mt-1">Available in storage</div>
+        </div>
+    </div>
+
+    <!-- Blood Stock Inventory Management -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900">Blood Bank Inventory Manager</h3>
+                <p class="text-xs text-slate-500">Live storage counts. Adjust unit counts directly.</p>
+            </div>
+            <span class="text-xs font-bold text-slate-500"><i class="fa-solid fa-arrows-rotate mr-1"></i> Auto-synced with donations</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {% for item in inventory %}
+            <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="w-10 h-10 rounded-xl bg-blood-600 text-white font-black text-sm flex items-center justify-center shadow-md shadow-blood-500/20">
+                        {{ item['blood_group'] }}
+                    </span>
+                    <span class="text-xl font-black text-slate-900">{{ item['units_available'] }} <span class="text-xs font-normal text-slate-500">units</span></span>
+                </div>
+
+                <form action="{{ url_for('update_inventory') }}" method="POST" class="flex gap-2">
+                    <input type="hidden" name="blood_group" value="{{ item['blood_group'] }}">
+                    <input type="number" name="units" min="0" value="{{ item['units_available'] }}" class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold">
+                    <button type="submit" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold transition">
+                        Save
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Emergency Requests Administration -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900">Manage Blood Requests</h3>
+                <p class="text-xs text-slate-500">Verify patient claims, approve broadcasts, or mark requirements fulfilled</p>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-slate-100 text-slate-400 uppercase font-bold text-[10px]">
+                        <th class="py-3 px-4">Req #</th>
+                        <th class="py-3 px-4">Patient Name</th>
+                        <th class="py-3 px-4">Group</th>
+                        <th class="py-3 px-4">Units</th>
+                        <th class="py-3 px-4">Hospital / City</th>
+                        <th class="py-3 px-4">Urgency</th>
+                        <th class="py-3 px-4">Current Status</th>
+                        <th class="py-3 px-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for req in all_requests %}
+                    <tr>
+                        <td class="py-3.5 px-4 font-mono text-slate-400">#{{ req['id'] }}</td>
+                        <td class="py-3.5 px-4 font-bold text-slate-900">
+                            {{ req['patient_name'] }}
+                            <div class="text-[10px] text-slate-400 font-normal">Contact: {{ req['contact_phone'] }}</div>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="w-7 h-7 rounded-lg bg-blood-50 text-blood-700 font-black inline-flex items-center justify-center text-xs">
+                                {{ req['blood_group'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 font-bold text-slate-800">{{ req['units_needed'] }} Unit(s)</td>
+                        <td class="py-3.5 px-4 text-slate-600">{{ req['hospital_name'] }}, {{ req['city'] }}</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase {% if req['urgency'] == 'Immediate' %}bg-red-100 text-red-700{% elif req['urgency'] == 'Urgent' %}bg-amber-100 text-amber-800{% else %}bg-slate-100 text-slate-700{% endif %}">
+                                {{ req['urgency'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {% if req['status'] == 'Approved' %}bg-emerald-100 text-emerald-800{% elif req['status'] == 'Fulfilled' %}bg-blue-100 text-blue-800{% else %}bg-amber-100 text-amber-800{% endif %}">
+                                {{ req['status'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <form action="{{ url_for('update_request_status', req_id=req['id']) }}" method="POST" class="flex gap-1.5">
+                                <select name="status" class="text-[11px] py-1 px-1.5 bg-slate-100 border border-slate-200 rounded-lg">
+                                    <option value="Pending" {% if req['status'] == 'Pending' %}selected{% endif %}>Pending</option>
+                                    <option value="Approved" {% if req['status'] == 'Approved' %}selected{% endif %}>Approve</option>
+                                    <option value="Fulfilled" {% if req['status'] == 'Fulfilled' %}selected{% endif %}>Fulfilled</option>
+                                    <option value="Cancelled" {% if req['status'] == 'Cancelled' %}selected{% endif %}>Cancel</option>
+                                </select>
+                                <button type="submit" class="px-2 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-[10px] font-bold">
+                                    Set
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Donation Appointments & Verifications -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-5">
+            <div>
+                <h3 class="text-base font-bold text-slate-900">Donor Appointments Verification</h3>
+                <p class="text-xs text-slate-500">Marking "Completed" automatically adds blood units to stock and updates donor cooldown date!</p>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-slate-100 text-slate-400 uppercase font-bold text-[10px]">
+                        <th class="py-3 px-4">Apt #</th>
+                        <th class="py-3 px-4">Donor Name</th>
+                        <th class="py-3 px-4">Blood Group</th>
+                        <th class="py-3 px-4">Center</th>
+                        <th class="py-3 px-4">Date & Time</th>
+                        <th class="py-3 px-4">Units</th>
+                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for apt in all_appointments %}
+                    <tr>
+                        <td class="py-3.5 px-4 font-mono text-slate-400">#{{ apt['id'] }}</td>
+                        <td class="py-3.5 px-4 font-bold text-slate-900">
+                            {{ apt['donor_name'] }}
+                            <div class="text-[10px] text-slate-400 font-normal">{{ apt['phone'] }}</div>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            <span class="w-7 h-7 rounded-lg bg-blood-50 text-blood-700 font-black inline-flex items-center justify-center text-xs">
+                                {{ apt['blood_group'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-700">{{ apt['blood_bank_center'] }}</td>
+                        <td class="py-3.5 px-4 text-slate-600">{{ apt['appointment_date'] }} at {{ apt['appointment_time'] }}</td>
+                        <td class="py-3.5 px-4 font-bold text-slate-800">{{ apt['units'] }} Unit</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold {% if apt['status'] == 'Completed' %}bg-emerald-100 text-emerald-800{% elif apt['status'] == 'Cancelled' %}bg-slate-100 text-slate-600{% else %}bg-blue-100 text-blue-800{% endif %}">
+                                {{ apt['status'] }}
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-4">
+                            {% if apt['status'] != 'Completed' %}
+                            <form action="{{ url_for('update_appointment_status', apt_id=apt['id']) }}" method="POST" class="inline">
+                                <input type="hidden" name="status" value="Completed">
+                                <button type="submit" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] shadow-sm transition">
+                                    <i class="fa-solid fa-check mr-1"></i> Mark Donated (+1 Unit)
+                                </button>
+                            </form>
+                            {% else %}
+                            <span class="text-emerald-600 font-bold text-[10px]"><i class="fa-solid fa-circle-check"></i> Stocked</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Activity Audit Logs -->
+    <div class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+        <h3 class="text-base font-bold text-slate-900 mb-3">System Activity & Audit Log</h3>
+        <div class="space-y-2">
+            {% for log in logs %}
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-start justify-between text-xs">
+                <div class="flex items-start space-x-2.5">
+                    <span class="w-2 h-2 rounded-full bg-blood-500 mt-1.5 flex-shrink-0"></span>
+                    <div>
+                        <span class="font-bold text-slate-800">{{ log['action_type'] }}:</span>
+                        <span class="text-slate-600 ml-1">{{ log['description'] }}</span>
+                    </div>
+                </div>
+                <span class="text-[10px] text-slate-400 font-mono flex-shrink-0 ml-4">{{ log['created_at'] }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

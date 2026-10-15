@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}Register - BloodLife Management System{% endblock %}
+
+{% block content %}
+<div class="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-2xl mx-auto">
+    <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-200">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-tr from-blood-600 to-rose-500 flex items-center justify-center text-white shadow-lg shadow-blood-500/25 mb-4">
+                <i class="fa-solid fa-user-plus text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-black text-slate-900 tracking-tight" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+                Create Your Account
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">Join the network as a voluntary donor or recipient</p>
+        </div>
+
+        <form action="{{ url_for('register') }}" method="POST" class="space-y-6" id="registration-form">
+            
+            <!-- Role Selection -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">I Want to Register As</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="cursor-pointer">
+                        <input type="radio" name="role" value="donor" checked class="peer sr-only" onchange="toggleDonorFields(true)">
+                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-blood-600 peer-checked:bg-blood-50/50 flex items-center space-x-3 transition">
+                            <span class="w-8 h-8 rounded-lg bg-blood-100 text-blood-700 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-hand-holding-heart"></i>
+                            </span>
+                            <div>
+                                <div class="text-sm font-bold text-slate-900">Blood Donor</div>
+                                <div class="text-[11px] text-slate-500">I want to give blood & save lives</div>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="cursor-pointer">
+                        <input type="radio" name="role" value="recipient" class="peer sr-only" onchange="toggleDonorFields(false)">
+                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-blood-600 peer-checked:bg-blood-50/50 flex items-center space-x-3 transition">
+                            <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-hospital-user"></i>
+                            </span>
+                            <div>
+                                <div class="text-sm font-bold text-slate-900">Recipient / Hospital</div>
+                                <div class="text-[11px] text-slate-500">I need blood for patients</div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- General Details -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Full Name *</label>
+                    <input type="text" name="full_name" required placeholder="John Doe" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Email Address *</label>
+                    <input type="email" name="email" required placeholder="john@example.com" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition">
+                </div>
+            </div>
+
+            <!-- Password Fields -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Password *</label>
+                    <input type="password" name="password" required minlength="6" placeholder="At least 6 characters" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Confirm Password *</label>
+                    <input type="password" name="confirm_password" required minlength="6" placeholder="Re-enter password" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition">
+                </div>
+            </div>
+
+            <!-- Contact & Location -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Phone Number *</label>
+                    <input type="tel" name="phone" required placeholder="+1 (555) 000-0000" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">City / Location *</label>
+                    <input type="text" name="city" required placeholder="New York, NY" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blood-500 focus:bg-white transition">
+                </div>
+            </div>
+
+            <!-- Blood Group Selector -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Blood Group *</label>
+                <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
+                    {% for bg in ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] %}
+                    <label class="cursor-pointer">
+                        <input type="radio" name="blood_group" value="{{ bg }}" class="peer sr-only" {% if bg == 'O+' %}checked{% endif %}>
+                        <div class="py-2.5 text-center rounded-xl border border-slate-200 text-xs font-bold peer-checked:bg-blood-600 peer-checked:text-white peer-checked:border-blood-600 shadow-sm transition">
+                            {{ bg }}
+                        </div>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Donor Specific Fields (Visible when Donor role is active) -->
+            <div id="donor-specific-fields" class="p-5 rounded-2xl bg-blood-50/40 border border-blood-100 space-y-4">
+                <div class="flex items-center space-x-2 text-blood-800 text-xs font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-notes-medical"></i>
+                    <span>Donor Medical & Health Details</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Age (18-65)</label>
+                        <input type="number" name="age" min="16" max="75" placeholder="e.g. 25" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Weight (kg, min 50)</label>
+                        <input type="number" step="0.5" name="weight" placeholder="e.g. 65" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Gender</label>
+                        <select name="gender" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Last Donation Date (if applicable)</label>
+                    <input type="date" name="last_donation_date" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm">
+                    <span class="text-[10px] text-slate-500 mt-1 block">Leave empty if this will be your first time donating.</span>
+                </div>
+            </div>
+
+            <!-- Consent -->
+            <div class="flex items-start">
+                <input type="checkbox" required class="mt-1 rounded border-slate-300 text-blood-600 focus:ring-blood-500 mr-2">
+                <label class="text-xs text-slate-600 leading-snug">
+                    I agree to the <a href="#" class="text-blood-600 underline font-semibold">Terms & Privacy Policy</a> and confirm that all medical and personal information provided is accurate and truthful.
+                </label>
+            </div>
+
+            <div>
+                <button type="submit" class="w-full py-3.5 px-4 bg-gradient-to-r from-blood-600 to-rose-600 hover:from-blood-700 hover:to-rose-700 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-blood-500/25 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>Complete Registration</span>
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center pt-6 border-t border-slate-100 mt-6">
+            <p class="text-xs text-slate-500">
+                Already have an account? 
+                <a href="{{ url_for('login') }}" class="font-bold text-blood-600 hover:text-blood-700 underline ml-1">Sign in here</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function toggleDonorFields(isDonor) {
+        const fields = document.getElementById('donor-specific-fields');
+        if (fields) {
+            fields.style.display = isDonor ? 'block' : 'none';
+        }
+    }
+</script>
+{% endblock %}
